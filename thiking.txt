@@ -1,0 +1,21 @@
+API 목록
+Req: /new?initial_values(plot_size, plot_type, ...) -> Res: plot_number
+
+Req: /view?num=plot_number -> Res: plot image?
+plot들을 tab으로 관리하며 plot_number == tab_number
+
+
+Req: /insert?data=value -> Res: success or fail
+기존에 존재하는 x에 대한 (x,y) pair를 제공하면 기존 값을 업데이트
+존재하지 않는 x에 대한 (x,y) pair를 제공하면 플롯 종류에 따라 새로운 값의 삽입
+
+
+플롯 종류
+x-y plot
+    pass-thru plot: x축의 길이가 정해져 있고 오래된 로그는 화면에서 제외됨
+    stack plot: x축의 길이가 계속 늘어나며 화면에서 비중을 줄여가며 지금까지 출력된 모든 값을 화면에 출력함
+
+    candle, bar, line
+
+pie chart
+

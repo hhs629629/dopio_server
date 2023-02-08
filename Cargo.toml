@@ -1,0 +1,23 @@
+[package]
+name = "dopio_server"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+axum = { version = "*"}
+tokio = { version = "*", features = ["full"]}
+
+serde = {version = "*", features = ["derive"]}
+serde_json = "*"
+
+mime_guess = "*"
+
+endorphin = "*"
+
+rand = "*"
+
+plotters = "*"
+
+thiserror = "*"

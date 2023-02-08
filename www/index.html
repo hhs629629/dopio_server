@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <style>
+      div {
+        width: 100vw;
+        height: 100vh;
+      }
+      canvas {
+        width: 90%;
+        height: 90%;
+        margin: 1%;
+      }
+      </style>
+  </head>
+  <body>
+    <div>
+      <canvas id="canv" width="1200" height="675"></canvas>
+    </div>
+    <script type="module">
+      import init, { Plot } from './www/pkg/dopio.js';
+
+      async function update(chart, index) {
+        const res = await fetch('http://127.0.0.1:3000/plot/' + String(index));
+        const data = await res.json();
+
+        chart.update(JSON.stringify(data));
+      }
+
+      async function run() {
+        await init();
+
+        const href = window.location.href.split('/');
+        const index = href[href.length - 1];
+
+        const res = await fetch('http://127.0.0.1:3000/plot_info/' + String(index));
+        const info = await res.json();
+
+        let chart = Plot.init("canv", JSON.stringify(info));
+
+        const interval = Number(chart.get_interval_as_millis());
+
+        update(chart, index);
+        setInterval(() => {
+          update(chart, index);
+        }, interval);
+      }
+
+      run();
+    </script>
+  </body>
+</html>
